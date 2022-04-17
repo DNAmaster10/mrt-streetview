@@ -1,5 +1,6 @@
 <?php
     session_start();
+    mysqli_report();
     include $_SERVER["DOCUMENT_ROOT"]."/includes/dbh.php";
     if (!isset($_POST["username"])) {
         $_SESSION["login_error_message"] = "Please enter a username";
@@ -16,9 +17,6 @@
     $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
     $stmt = $stmt->bind_param("s", $username);
     $raw_result = $stmt->execute();
-    if (!$stmt){
-        error_log("Failed: ".$conn->errno." OR ".$conn->error);
-    }
     if ($raw_result->num_rows > 0) {
         $row = $raw_result->fetch_assoc();
 		$result = $row["password"];

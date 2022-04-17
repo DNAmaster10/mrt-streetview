@@ -1,6 +1,6 @@
 <?php
     session_start();
-    mysqli_report();
+    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     include $_SERVER["DOCUMENT_ROOT"]."/includes/dbh.php";
     if (!isset($_POST["username"])) {
         $_SESSION["login_error_message"] = "Please enter a username";

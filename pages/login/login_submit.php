@@ -23,7 +23,7 @@
 		unset($raw_result);
     }
     else {
-        $_SESSION["login_error_message"] = "Account not found.";
+        $_SESSION["login_error_message"] = "Account not found.".$result;
         header ("location: /pages/login/login.php");
         die();
     }

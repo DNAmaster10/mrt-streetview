@@ -25,7 +25,7 @@
     else {
         $_SESSION["login_error_message"] = "Account not found.";
         header ("location: /pages/login/login.php");
-        die()
+        die();
     }
     if ($result == $password) {
         $_SESSION["username"] = $username;

@@ -8,7 +8,7 @@
         die();
     }
     $location_name = $conn->real_escape_string($_POST["location_name"]);
-    $stmp = $conn->prepare("SELECT location FROM locations WHERE location='?';");
+    $stmp = $conn->prepare("SELECT location FROM locations WHERE location=?;");
     $stmp ->bind_param("s",$location_name);
     $raw_result = $stmp->execute();
     if ($raw_result->num_rows > 0) {
@@ -21,7 +21,7 @@
         $stmp->bind_param("s",$location_name);
         $stmp->execute();
 
-        $stmp = $conn->prepare("SELECT id FROM locations WHERE location='?';");
+        $stmp = $conn->prepare("SELECT id FROM locations WHERE location=?;");
         $stmp->bind_param("s", $location_name);
         $raw_result = $stmp->execute();
         if ($raw_result->num_rows > 0) {

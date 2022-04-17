@@ -12,14 +12,13 @@
         die();
     }
     $username = $conn->real_escape_string($_POST["username"]);
-    error_log($username);
     $password = $conn->real_escape_string($_POST["password"]);
     $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
     $stmt->bind_result($result);
     $stmt->fetch();
-    if ($raw_result) {
+    if ($result) {
         if ($result == $password) {
            $_SESSION["username"] = $username;
             $_SESSION["password"] = $password;
@@ -33,7 +32,7 @@
         }
     }
     else {
-        $_SESSION["login_error_message"] = "Account not found.".$result;
+        $_SESSION["login_error_message"] = "Account not found.";
         header ("location: /pages/login/login.php");
         die();
     }

@@ -15,6 +15,9 @@
     $password = $conn->real_escape_string($_POST["password"]);
     $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
     $stmt = $stmt->bind_param("s", $username);
+    if (!$stmt){
+        error_log("Failed: ".$conn->errno." OR ".$conn->error);
+    }
     $raw_result = $stmt->execute();
     if ($raw_result->num_rows > 0) {
         $row = $raw_result->fetch_assoc();

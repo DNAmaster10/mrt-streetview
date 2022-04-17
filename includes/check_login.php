@@ -3,8 +3,8 @@
         header ("location: /pages/session_expired.php");
         die();
     }
-    $stmt = $conn->prepare("SELECT password FROM users WHERE username='?'");
-    $stmt = $conn->bind_param("s",$_SESSION["username"]);
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
+    $stmt = $stmt->bind_param("s",$_SESSION["username"]);
     $raw_result = $stmt->execute();
     if ($raw_result->num_rows > 0) {
         $row = $raw_result->fetch_assoc();

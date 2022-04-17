@@ -24,5 +24,10 @@
         $stmp = $conn->prepare("SELECT id FROM locations WHERE location='?';");
         $stmp = $conn->bind_param("s", $location_name);
         $raw_result = $stmp->execute();
+        if ($raw_result->num_rows > 0) {
+            $row = $raw_result->fetch_assoc();
+            $result = $row["id"];
+            mkdir($_SERVER["DOCUMENT_ROOT"]."/assets/images/".$result);
+        }
     }
 ?>

@@ -16,7 +16,7 @@
     $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
     $stmt->bind_param("s", $username);
     $raw_result = $stmt->execute();
-    if ($raw_result->num_rows > 0) {
+    if ($raw_result->num_rows() > 0) {
         $row = $raw_result->fetch_assoc();
 		$result = $row["password"];
 		unset($row);

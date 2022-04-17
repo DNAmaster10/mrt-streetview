@@ -12,8 +12,9 @@
         die();
     }
     $username = $conn->real_escape_string($_POST["username"]);
+    error_log($username);
     $password = $conn->real_escape_string($_POST["password"]);
-    $stmt = $conn->prepare("SELECT password FROM users WHERE username=?;");
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
     $stmt->bind_param("s", $username);
     $raw_result = $stmt->execute();
     if ($raw_result->num_rows > 0) {

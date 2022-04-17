@@ -1,6 +1,5 @@
 <?php
     session_start();
-    mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
     include $_SERVER["DOCUMENT_ROOT"]."/includes/dbh.php";
     if (!isset($_POST["username"])) {
         $_SESSION["login_error_message"] = "Please enter a username";
@@ -18,26 +17,23 @@
     $stmt = $conn->prepare("SELECT password FROM users WHERE username=?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $stmt->bind_result($raw_result);
-    if ($raw_result->num_rows > 0) {
-        $row = $raw_result->fetch_assoc();
-		$result = $row["password"];
-		unset($row);
-		unset($raw_result);
+    $stmt->bind_result($result);
+    $stmt->fetch();
+    if ($raw_result) {
+        if ($result == $password) {
+           $_SESSION["username"] = $username;
+            $_SESSION["password"] = $password;
+            header ("location: /pages/user/home.php");
+            die();
+        }
+        else {
+            $_SESSION["login_error_message"] = "Invalid password.";
+            header ("location: /pages/login/login.php");
+            die();
+        }
     }
     else {
         $_SESSION["login_error_message"] = "Account not found.".$result;
-        header ("location: /pages/login/login.php");
-        die();
-    }
-    if ($result == $password) {
-        $_SESSION["username"] = $username;
-        $_SESSION["password"] = $password;
-        header ("location: /pages/user/home.php");
-        die();
-    }
-    else {
-        $_SESSION["login_error_message"] = "Invalid password.";
         header ("location: /pages/login/login.php");
         die();
     }

@@ -9,7 +9,7 @@
     }
     $location_name = $conn->real_escape_string($_POST["location_name"]);
     $stmp = $conn->prepare("SELECT location FROM locations WHERE location='?';");
-    $stmp = $conn->bind_param("s",$location_name);
+    $stmp ->bind_param("s",$location_name);
     $raw_result = $stmp->execute();
     if ($raw_result->num_rows > 0) {
         $_SESSION["create_location_error_message"] = "That location already exists! Try editing the already existing location rather than creating a new one.";
@@ -18,11 +18,11 @@
     }
     else {
         $stmp = $conn->prepare("INSERT INTO locations (location) VALUES (?);");
-        $stmp = $conn->bind_param("s",$location_name);
+        $stmp->bind_param("s",$location_name);
         $stmp->execute();
 
         $stmp = $conn->prepare("SELECT id FROM locations WHERE location='?';");
-        $stmp = $conn->bind_param("s", $location_name);
+        $stmp->bind_param("s", $location_name);
         $raw_result = $stmp->execute();
         if ($raw_result->num_rows > 0) {
             $row = $raw_result->fetch_assoc();

@@ -15,7 +15,7 @@
     <body>
         <p>Enter the name of the city or location you wish to create</p>
         <form action="create_location_submit.php" method="POST">
-            <input type="text" placeholder="location">
+            <input type="text" name="location_name" placeholder="location">
             <input type="submit" value="Create">
         </form>
         <p><?php if(isset($error_message)) {echo $error_message;} ?></p>

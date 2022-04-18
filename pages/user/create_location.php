@@ -2,7 +2,7 @@
     session_start();
     include $_SERVER["DOCUMENT_ROOT"]."/includes/dbh.php";
     include $_SERVER["DOCUMENT_ROOT"]."/includes/check_login.php";
-    if (isset($_SESSION["create_location_error_message"])) {
+    if (isset($_SESSION["create_location_error_message"]) {
         $error_message = $_SESSION["create_location_error_message"]);
         unset ($_SESSION["create_location_error_message"]);
     }

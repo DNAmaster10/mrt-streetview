@@ -9,10 +9,10 @@
     }
     $location_name = $conn->real_escape_string($_POST["location_name"]);
     $stmp = $conn->prepare("SELECT location FROM locations WHERE location=?");
-    $stmp->bind_param("s", $location_name);
-    $stmp->execute();
-    $stmp->bind_result($result);
-    $stmp->fetch();
+    $stmt->bind_param("s", $location_name);
+    $stmt->execute();
+    $stmt->bind_result($result);
+    $stmt->fetch();
     if ($result) {
         $_SESSION["create_location_error_message"] = "That location already exists! Try editing the already existing location rather than creating a new one.";
         header ("location: /pages/user/create_location.php");

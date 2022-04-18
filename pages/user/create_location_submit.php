@@ -1,6 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
     session_start();
     include $_SERVER["DOCUMENT_ROOT"]."/includes/dbh.php";
     include $_SERVER["DOCUMENT_ROOT"]."/includes/check_login.php";
@@ -11,7 +9,7 @@
     }
     $location_name = $conn->real_escape_string($_POST["location_name"]);
     $stmp = $conn->prepare("SELECT location FROM locations WHERE location=?");
-    $stmp->bind_param("s",$location_name);
+    $stmp->bind_param("s", $location_name);
     $stmp->execute();
     $stmp->bind_result($result);
     $stmp->fetch();
@@ -22,7 +20,7 @@
     }
     else {
         $stmp1 = $conn->prepare("INSERT INTO locations (location) VALUES (?);");
-        $stmp1->bind_param("s",$location_name);
+        $stmp1->bind_param("s", $location_name);
         $stmp1->execute();
         $stmp2 = $conn->prepare("SELECT id FROM locations WHERE location=?;");
         $stmp2->bind_param("s", $location_name);

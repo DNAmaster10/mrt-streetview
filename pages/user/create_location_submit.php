@@ -1,7 +1,7 @@
 <?php
     session_start();
-    include $_SERVER."/includes/dbh.php";
-    include $_SERVER."/includes/check_login.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/includes/dbh.php";
+    include $_SERVER["DOCUMENT_ROOT"]."/includes/check_login.php";
     if (!isset($_POST["location_name"])) {
         $_SESSION["create_location_error_message"] = "Please enter a location name.";
         header ("location: /pages/user/create_location.php");

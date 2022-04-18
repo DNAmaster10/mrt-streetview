@@ -16,7 +16,7 @@
     if ($result) {
         $_SESSION["create_location_error_message"] = "That location already exists! Try editing the already existing location rather than creating a new one.";
         header ("location: /pages/user/create_location.php");
-        die()
+        die();
     }
     else {
         $stmp1 = $conn->prepare("INSERT INTO locations (location) VALUES (?);");

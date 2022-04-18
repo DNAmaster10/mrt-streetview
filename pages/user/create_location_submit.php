@@ -13,20 +13,23 @@
     $stmt->execute();
     $stmt->bind_result($result);
     $stmt->fetch();
+    $stmt->close();
     if ($result) {
         $_SESSION["create_location_error_message"] = "That location already exists! Try editing the already existing location rather than creating a new one.";
         header ("location: /pages/user/create_location.php");
         die();
     }
     else {
-        $stmp1 = $conn->prepare("INSERT INTO locations (location) VALUES (?);");
-        $stmp1->bind_param("s", $location_name);
-        $stmp1->execute();
-        $stmp2 = $conn->prepare("SELECT id FROM locations WHERE location=?;");
-        $stmp2->bind_param("s", $location_name);
-        $stmp2->execute();
-        $stmp2->bind_result($result);
-        $stmp2->fetch();
+        $stmt = $conn->prepare("INSERT INTO locations (location) VALUES (?);");
+        $stmt->bind_param("s", $location_name);
+        $stmt->execute();
+        $stmt->close();
+        $stmt = $conn->prepare("SELECT id FROM locations WHERE location=?;");
+        $stmt->bind_param("s", $location_name);
+        $stmt->execute();
+        $stmt->bind_result($result);
+        $stmt->fetch();
+        $stmt->close();
         if ($result) {
             mkdir($_SERVER["DOCUMENT_ROOT"]."/assets/images/".$result);
         }

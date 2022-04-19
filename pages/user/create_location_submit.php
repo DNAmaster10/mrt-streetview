@@ -30,6 +30,7 @@
         $stmt->execute();
         $stmt->bind_result($result);
         $stmt->fetch();
+        error_log($result);
         $stmt->close();
         if ($result) {
             mkdir($_SERVER["DOCUMENT_ROOT"]."/assets/images/".$result);

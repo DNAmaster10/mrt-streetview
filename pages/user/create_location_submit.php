@@ -9,7 +9,7 @@
     }
     unset($result);
     $location_name = $conn->real_escape_string($_POST["location_name"]);
-    $stmp = $conn->prepare("SELECT location FROM locations WHERE location=?");
+    $stmt = $conn->prepare("SELECT location FROM locations WHERE location=?");
     $stmt->bind_param("s", $location_name);
     $stmt->execute();
     $stmt->bind_result($result);

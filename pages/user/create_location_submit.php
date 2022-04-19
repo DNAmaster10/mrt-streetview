@@ -7,6 +7,7 @@
         header ("location: /pages/user/create_location.php");
         die();
     }
+    unset($result);
     $location_name = $conn->real_escape_string($_POST["location_name"]);
     $stmp = $conn->prepare("SELECT location FROM locations WHERE location=?");
     $stmt->bind_param("s", $location_name);

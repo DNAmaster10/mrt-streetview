@@ -8,6 +8,7 @@
     $stmt->execute();
     $stmt->bind_result($result);
     $stmt->fetch();
+    $stnt->close();
     if ($result) {
         if ($result == $_SESSION["password"]) {
             $logged_in = true;

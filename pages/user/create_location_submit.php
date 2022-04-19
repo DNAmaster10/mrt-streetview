@@ -14,7 +14,6 @@
     $stmt->execute();
     $stmt->bind_result($result);
     $stmt->fetch();
-    error_log("Is found: " . $result);
     $stmt->close();
     if ($result == $location_name) {
         $_SESSION["create_location_error_message"] = "That location already exists! Try editing the already existing location rather than creating a new one.";
@@ -31,7 +30,6 @@
         $stmt->execute();
         $stmt->bind_result($result);
         $stmt->fetch();
-        error_log($result);
         $stmt->close();
         if ($result) {
             mkdir($_SERVER["DOCUMENT_ROOT"]."/assets/images/".$result);

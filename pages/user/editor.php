@@ -10,7 +10,7 @@
     $stmt->fetch();
     $stmt->close();
     
-    $stmt = $conn->prepare("SELECT 
+    $stmt = $conn->prepare("SELECT
 ?>
 <!DOCTYPE html>
 <html>
